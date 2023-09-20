@@ -1,4 +1,5 @@
-import { createPagination } from "./utility.js";
+import { createPagination, generateQueryParams } from "./utility.js";
+import { currentPage } from "./app.js";
 
 const BASE_URL = "https://6300a18859a8760a757d441c.mockapi.io";
 
@@ -12,7 +13,12 @@ export const readProducts = async () => {
   const loadingSpinner = document.querySelector(".spinner-container");
   try {
     loadingSpinner.classList.toggle("d-none");
-    const res = await fetch(`${BASE_URL}/products`, { signal });
+    const res = await fetch(
+      `${BASE_URL}/products${generateQueryParams(currentPage)}`,
+      {
+        signal,
+      }
+    );
     const data = await res.json();
     const { products, count } = data;
     productsTable.innerHTML = "";

@@ -24,3 +24,8 @@ export const createPagination = (productCount) => {
             </li>`;
   document.querySelector("ul.pagination").innerHTML = lis;
 };
+
+export const generateQueryParams = (page = 1) => {
+  let queryParams = `?page=${page}&limit=${DEFAULT_PAGE_SIZE}`;
+  return queryParams;
+};
