@@ -66,3 +66,23 @@ document
 document.querySelector("#refresh-btn").addEventListener("click", readProducts);
 
 productForm.addEventListener("submit", createNewProduct);
+
+const preventDragDefault = (e) => {
+  e.stopPropagation();
+  e.preventDefault();
+};
+document
+  .querySelector(".image-selector")
+  .addEventListener("dragover", (e) => preventDragDefault(e));
+document
+  .querySelector(".image-selector")
+  .addEventListener("dragenter", (e) => preventDragDefault(e));
+
+document.querySelector(".image-selector").addEventListener("drop", (e) => {
+  preventDragDefault(e);
+  if (e.dataTransfer.files) {
+    document.querySelector("#product-display").src = URL.createObjectURL(
+      e.dataTransfer.files[0]
+    );
+  }
+});
