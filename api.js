@@ -1,3 +1,5 @@
+import { createPagination } from "./utility.js";
+
 const BASE_URL = "https://6300a18859a8760a757d441c.mockapi.io";
 
 const productsTable = document.querySelector("#products tbody");
@@ -12,9 +14,10 @@ export const readProducts = async () => {
     loadingSpinner.classList.toggle("d-none");
     const res = await fetch(`${BASE_URL}/products`, { signal });
     const data = await res.json();
-    const { products } = data;
+    const { products, count } = data;
     productsTable.innerHTML = "";
     products.forEach(addToDOM);
+    createPagination(count);
   } catch (error) {
     console.log(error.message);
   } finally {
