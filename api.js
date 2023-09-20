@@ -4,6 +4,7 @@ import { currentPage, currentPageSize, queryString } from "./app.js";
 const BASE_URL = "https://6300a18859a8760a757d441c.mockapi.io";
 
 const productsTable = document.querySelector("#products tbody");
+export const editModal = document.querySelector("#editModal");
 
 export const controller = new AbortController();
 const signal = controller.signal;
@@ -107,6 +108,9 @@ const generateTableCells = (product) => {
   editButton.innerHTML = '<i class="bi bi-pen"></i>';
   editButton.title = "UPDATE";
   editButton.className = "btn btn-primary btn-sm";
+  editButton.dataset.bsToggle = "modal";
+  editButton.dataset.bsTarget = "#editModal";
+  editButton.addEventListener("click", () => editProduct(product));
 
   const deleteButton = document.createElement("button");
   deleteButton.dataset.id = product.id;
@@ -119,4 +123,14 @@ const generateTableCells = (product) => {
   actionCell.appendChild(editButton);
   actionCell.appendChild(deleteButton);
   return { nameCell, priceCell, countCell, createDateCell, actionCell };
+};
+
+const editProduct = (product) => {
+  editModal.querySelector("#name").value = product.name;
+  editModal.querySelector("#price").value = product.price;
+  editModal.querySelector("#countInStock").value = product.countInStock;
+  editModal.querySelector("#description").value = product.description;
+  editModal.querySelector("#department").value = product.department;
+  editModal.querySelector("#material").value = product.material;
+  editModal.querySelector("#confirm-edit-btn").dataset.id = product.id;
 };
