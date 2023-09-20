@@ -185,3 +185,16 @@ const updateOnFrontEnd = (product) => {
   productRow.appendChild(createDateCell);
   productRow.appendChild(actionCell);
 };
+
+/////// DELETE ///////
+export const deleteProduct = async (productId) => {
+  try {
+    const res = await fetch(`${BASE_URL}/products/${productId}`, {
+      method: "DELETE",
+    });
+    await res.json();
+    readProducts();
+  } catch (error) {
+    console.log(error.message);
+  }
+};

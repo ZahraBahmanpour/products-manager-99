@@ -3,6 +3,7 @@ import {
   controller,
   createNewProduct,
   updateProduct,
+  deleteProduct,
 } from "./api.js";
 import { DEFAULT_PAGE_SIZE, debounce } from "./utility.js";
 
@@ -103,3 +104,10 @@ document.getElementById("file-input").addEventListener("change", (e) => {
 });
 
 editProductForm.addEventListener("submit", updateProduct);
+
+document
+  .querySelector("#confirm-delete-btn")
+  .addEventListener("click", (event) => {
+    const id = event.target.dataset.id;
+    deleteProduct(id);
+  });
