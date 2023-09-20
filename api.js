@@ -2,12 +2,15 @@ const BASE_URL = "https://6300a18859a8760a757d441c.mockapi.io";
 
 const productsTable = document.querySelector("#products tbody");
 
+export const controller = new AbortController();
+const signal = controller.signal;
+
 // READ
 export const readProducts = async () => {
   const loadingSpinner = document.querySelector(".spinner-container");
   try {
     loadingSpinner.classList.toggle("d-none");
-    const res = await fetch(`${BASE_URL}/products`);
+    const res = await fetch(`${BASE_URL}/products`, { signal });
     const data = await res.json();
     const { products } = data;
     productsTable.innerHTML = "";
