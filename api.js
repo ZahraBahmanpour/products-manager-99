@@ -8,6 +8,30 @@ const productsTable = document.querySelector("#products tbody");
 export const controller = new AbortController();
 const signal = controller.signal;
 
+/////// CREATE ///////
+export const createNewProduct = async (event) => {
+  event.preventDefault();
+  const newProduct = {
+    name: event.target["name"].value,
+    price: event.target["price"].value,
+    countInStock: event.target["countInStock"].value,
+  };
+  try {
+    const res = await fetch(`${BASE_URL}/products`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(newProduct),
+    });
+    const createdProduct = await res.json();
+    addToDOM(createdProduct);
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
 // READ
 export const readProducts = async () => {
   const loadingSpinner = document.querySelector(".spinner-container");

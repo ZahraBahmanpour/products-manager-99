@@ -1,9 +1,11 @@
-import { readProducts, controller } from "./api.js";
+import { readProducts, controller, createNewProduct } from "./api.js";
 import { DEFAULT_PAGE_SIZE, debounce } from "./utility.js";
 
 export let currentPage = 1;
 export let currentPageSize = DEFAULT_PAGE_SIZE;
 export let queryString;
+
+const productForm = document.querySelector("#create-product");
 
 // EVENT LISTENERS
 
@@ -62,3 +64,5 @@ document
   });
 
 document.querySelector("#refresh-btn").addEventListener("click", readProducts);
+
+productForm.addEventListener("submit", createNewProduct);
