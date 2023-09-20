@@ -1,5 +1,5 @@
 import { createPagination, generateQueryParams } from "./utility.js";
-import { currentPage } from "./app.js";
+import { currentPage, currentPageSize } from "./app.js";
 
 const BASE_URL = "https://6300a18859a8760a757d441c.mockapi.io";
 
@@ -14,7 +14,10 @@ export const readProducts = async () => {
   try {
     loadingSpinner.classList.toggle("d-none");
     const res = await fetch(
-      `${BASE_URL}/products${generateQueryParams(currentPage)}`,
+      `${BASE_URL}/products${generateQueryParams(
+        currentPage,
+        currentPageSize
+      )}`,
       {
         signal,
       }

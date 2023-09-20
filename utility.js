@@ -1,9 +1,9 @@
-import { currentPage } from "./app.js";
+import { currentPage, currentPageSize } from "./app.js";
 
 export const DEFAULT_PAGE_SIZE = 5;
 
 export const createPagination = (productCount) => {
-  const pageCount = Math.ceil(productCount / DEFAULT_PAGE_SIZE);
+  const pageCount = Math.ceil(productCount / currentPageSize);
 
   let lis = `<li class="page-item ${
     Number(currentPage) === 1 ? "disabled no-events" : ""
@@ -25,7 +25,7 @@ export const createPagination = (productCount) => {
   document.querySelector("ul.pagination").innerHTML = lis;
 };
 
-export const generateQueryParams = (page = 1) => {
-  let queryParams = `?page=${page}&limit=${DEFAULT_PAGE_SIZE}`;
+export const generateQueryParams = (page = 1, pageSize) => {
+  let queryParams = `?page=${page}&limit=${pageSize}`;
   return queryParams;
 };

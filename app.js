@@ -1,6 +1,8 @@
 import { readProducts, controller } from "./api.js";
+import { DEFAULT_PAGE_SIZE } from "./utility.js";
 
 export let currentPage = 1;
+export let currentPageSize = DEFAULT_PAGE_SIZE;
 
 // EVENT LISTENERS
 
@@ -43,3 +45,9 @@ document
     await readProducts();
     window.scrollTo({ top: document.body.scrollHeight });
   });
+
+document.querySelector("#page-size").addEventListener("change", async (e) => {
+  currentPageSize = e.target.value;
+  currentPage = 1;
+  await readProducts();
+});
