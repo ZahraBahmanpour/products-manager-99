@@ -29,33 +29,57 @@
     />
   </head>
   <body>
-    <table class="table bg-white table-hover rounded" id="products">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Price</th>
-          <th>Count</th>
-          <th>Create Date</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-    <div
-      class="d-flex justify-content-center"
-      style="height: 2.3rem; gap: 1rem"
-    >
-      <ul class="pagination"></ul>
-      <select
-        class="form-select"
-        id="page-size"
-        style="width: 2rem; padding: 0.5rem; text-align: center"
+    <div class="container">
+      <div class="row justify-content-center align-items-center m-5">
+        <div class="col-8">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search Products here..."
+            id="searchBox"
+          />
+        </div>
+        <div class="col-4">
+          <button
+            class="btn btn-success"
+            data-bs-toggle="modal"
+            data-bs-target="#createModal"
+          >
+            Add<i class="bi bi-plus"></i>
+          </button>
+          <button class="btn btn-secondary" id="refresh-btn">
+            Refresh<i class="bi bi-arrow-clockwise"></i>
+          </button>
+        </div>
+      </div>
+      <table class="table bg-white table-hover rounded" id="products">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Count</th>
+            <th>Create Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div
+        class="d-flex justify-content-center"
+        style="height: 2.3rem; gap: 1rem"
       >
-        <option value="5" selected>5</option>
-        <option value="10">10</option>
-        <option value="20">20</option>
-        <option value="50">50</option>
-      </select>
+        <ul class="pagination"></ul>
+        <select
+          class="form-select"
+          id="page-size"
+          style="width: 2rem; padding: 0.5rem; text-align: center"
+        >
+          <option value="5" selected>5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+        </select>
+      </div>
     </div>
 
     <!-- Loading Spinner -->

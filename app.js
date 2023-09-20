@@ -1,8 +1,9 @@
 import { readProducts, controller } from "./api.js";
-import { DEFAULT_PAGE_SIZE } from "./utility.js";
+import { DEFAULT_PAGE_SIZE, debounce } from "./utility.js";
 
 export let currentPage = 1;
 export let currentPageSize = DEFAULT_PAGE_SIZE;
+export let queryString;
 
 // EVENT LISTENERS
 
@@ -51,3 +52,10 @@ document.querySelector("#page-size").addEventListener("change", async (e) => {
   currentPage = 1;
   await readProducts();
 });
+
+document
+  .querySelector("#searchBox")
+  .addEventListener("input", async (event) => {
+    queryString = event.target.value.toLowerCase();
+    await readProducts();
+  });

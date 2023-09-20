@@ -25,7 +25,18 @@ export const createPagination = (productCount) => {
   document.querySelector("ul.pagination").innerHTML = lis;
 };
 
-export const generateQueryParams = (page = 1, pageSize) => {
+export const generateQueryParams = (page = 1, queryString = "", pageSize) => {
   let queryParams = `?page=${page}&limit=${pageSize}`;
+  if (queryString !== "") {
+    queryParams += `&name=${queryString}`;
+  }
   return queryParams;
+};
+
+export const debounce = (cb, delay = 1000) => {
+  let timeout;
+  return (...args) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => cb(...args), delay);
+  };
 };
