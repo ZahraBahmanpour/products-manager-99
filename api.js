@@ -26,6 +26,9 @@ export const createNewProduct = async (event) => {
       body: JSON.stringify(newProduct),
     });
     const createdProduct = await res.json();
+    const formData = new FormData();
+    formData.append("image", event.target["file-input"].files[0]);
+    await fetch(`${BASE_URL}/upload`, { method: "POST", body: formData });
     addToDOM(createdProduct);
   } catch (error) {
     console.log(error.message);
