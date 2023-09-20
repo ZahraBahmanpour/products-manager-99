@@ -117,6 +117,9 @@ const generateTableCells = (product) => {
   deleteButton.innerHTML = '<i class="bi bi-trash"></i>';
   deleteButton.title = "DELETE";
   deleteButton.className = "btn btn-danger btn-sm m-1";
+  deleteButton.dataset.bsToggle = "modal";
+  deleteButton.dataset.bsTarget = "#deleteModal";
+  deleteButton.addEventListener("click", () => removeProduct(product.id));
 
   const actionCell = document.createElement("td");
   actionCell.appendChild(viewButton);
@@ -133,6 +136,10 @@ const editProduct = (product) => {
   editModal.querySelector("#department").value = product.department;
   editModal.querySelector("#material").value = product.material;
   editModal.querySelector("#confirm-edit-btn").dataset.id = product.id;
+};
+
+const removeProduct = (id) => {
+  document.querySelector("#confirm-delete-btn").dataset.id = id;
 };
 
 export const gatherEditFormData = (e) => {
