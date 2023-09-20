@@ -53,9 +53,10 @@ document.querySelector("#page-size").addEventListener("change", async (e) => {
   await readProducts();
 });
 
+const debouncedReadProducts = debounce(readProducts);
 document
   .querySelector("#searchBox")
   .addEventListener("input", async (event) => {
     queryString = event.target.value.toLowerCase();
-    await readProducts();
+    await debouncedReadProducts();
   });
