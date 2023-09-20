@@ -86,3 +86,11 @@ document.querySelector(".image-selector").addEventListener("drop", (e) => {
     );
   }
 });
+
+document.getElementById("file-input").addEventListener("change", (e) => {
+  if (e.target.files) {
+    document.querySelector("#product-display").src = URL.createObjectURL(
+      e.target.files[0]
+    );
+  }
+});
