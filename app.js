@@ -66,7 +66,3 @@ document
 document.querySelector("#refresh-btn").addEventListener("click", readProducts);
 
 productForm.addEventListener("submit", createNewProduct);
-
-productForm.querySelector("#btn-reset").addEventListener("click", () => {
-  productForm.rese;
-});
