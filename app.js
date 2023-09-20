@@ -60,3 +60,5 @@ document
     queryString = event.target.value.toLowerCase();
     await debouncedReadProducts();
   });
+
+document.querySelector("#refresh-btn").addEventListener("click", readProducts);
