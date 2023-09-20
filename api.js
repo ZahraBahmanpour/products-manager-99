@@ -134,3 +134,47 @@ const editProduct = (product) => {
   editModal.querySelector("#material").value = product.material;
   editModal.querySelector("#confirm-edit-btn").dataset.id = product.id;
 };
+
+export const gatherEditFormData = (e) => {
+  return {
+    name: e.target["name"].value,
+    price: e.target["price"].value,
+    countInStock: e.target["countInStock"].value,
+    description: e.target["description"].value,
+    department: e.target["department"].value,
+    material: e.target["material"].value,
+  };
+};
+
+/////// UPDATE ///////
+export const updateProduct = async (e) => {
+  e.preventDefault();
+  const updatedProduct = gatherEditFormData(e);
+
+  const id = e.target["confirm-edit-btn"].dataset.id;
+  try {
+    const res = await fetch(`${BASE_URL}/products/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(updatedProduct),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const product = await res.json();
+    updateOnFrontEnd(product);
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+const updateOnFrontEnd = (product) => {
+  const productRow = productsTable.querySelector(`tr[data-id="${product.id}"]`);
+  productRow.innerHTML = "";
+  const { nameCell, priceCell, countCell, createDateCell, actionCell } =
+    generateTableCells(product);
+  productRow.appendChild(nameCell);
+  productRow.appendChild(priceCell);
+  productRow.appendChild(countCell);
+  productRow.appendChild(createDateCell);
+  productRow.appendChild(actionCell);
+};
