@@ -4,7 +4,9 @@ const productsTable = document.querySelector("#products tbody");
 
 // READ
 export const readProducts = async () => {
+  const loadingSpinner = document.querySelector(".spinner-container");
   try {
+    loadingSpinner.classList.toggle("d-none");
     const res = await fetch(`${BASE_URL}/products`);
     const data = await res.json();
     const { products } = data;
@@ -12,6 +14,8 @@ export const readProducts = async () => {
     products.forEach(addToDOM);
   } catch (error) {
     console.log(error.message);
+  } finally {
+    loadingSpinner.classList.toggle("d-none");
   }
 };
 

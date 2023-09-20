@@ -17,3 +17,19 @@ table th i {
 table th i:hover {
   color: lightslategrey;
 }
+
+.spinner-container {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.spinner-border {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+}
