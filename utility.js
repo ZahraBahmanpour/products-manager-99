@@ -33,6 +33,12 @@ export const generateQueryParams = (page = 1, queryString = "", pageSize) => {
   return queryParams;
 };
 
+export const updateURLParam = (key, value) => {
+  const url = new URL(window.location.href);
+  url.searchParams.set(key, value);
+  window.history.pushState(undefined, undefined, url);
+};
+
 export const debounce = (cb, delay = 1000) => {
   let timeout;
   return (...args) => {
