@@ -1,8 +1,8 @@
 import { currentPage, currentPageSize } from "./app.js";
 
-export const DEFAULT_PAGE_SIZE = 5;
+const DEFAULT_PAGE_SIZE = 5;
 
-export const createPagination = (productCount) => {
+const createPagination = (productCount) => {
   const pageCount = Math.ceil(productCount / currentPageSize);
 
   let lis = `<li class="page-item ${
@@ -25,7 +25,7 @@ export const createPagination = (productCount) => {
   document.querySelector("ul.pagination").innerHTML = lis;
 };
 
-export const generateQueryParams = (page = 1, queryString = "", pageSize) => {
+const generateQueryParams = (page = 1, queryString = "", pageSize) => {
   let queryParams = `?page=${page}&limit=${pageSize}`;
   if (queryString !== "") {
     queryParams += `&name=${queryString}`;
@@ -33,16 +33,27 @@ export const generateQueryParams = (page = 1, queryString = "", pageSize) => {
   return queryParams;
 };
 
-export const updateURLParam = (key, value) => {
+const updateURLParam = (key, value) => {
   const url = new URL(window.location.href);
   url.searchParams.set(key, value);
   window.history.pushState(undefined, undefined, url);
 };
 
-export const debounce = (cb, delay = 1000) => {
+const debounce = (cb, delay = 1000) => {
   let timeout;
   return (...args) => {
     clearTimeout(timeout);
     timeout = setTimeout(() => cb(...args), delay);
   };
+};
+
+const person = { username: "Admin", password: "12345" };
+export default person;
+
+export {
+  DEFAULT_PAGE_SIZE,
+  createPagination,
+  generateQueryParams,
+  updateURLParam,
+  debounce,
 };

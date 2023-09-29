@@ -1,4 +1,4 @@
-import { createPagination, generateQueryParams } from "./utility.js";
+import person, { createPagination, generateQueryParams } from "./utility.js";
 import { currentPage, currentPageSize, queryString } from "./app.js";
 
 const BASE_URL = "https://6300a18859a8760a757d441c.mockapi.io";
@@ -56,6 +56,7 @@ export const createNewProduct = async (event) => {
 // READ
 export const readProducts = async () => {
   const loadingSpinner = document.querySelector(".spinner-container");
+  // alert(person.username);
   try {
     loadingSpinner.classList.toggle("d-none");
     const res = await fetch(

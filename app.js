@@ -5,8 +5,7 @@ import {
   updateProduct,
   deleteProduct,
 } from "./api.js";
-import { DEFAULT_PAGE_SIZE, debounce } from "./utility.js";
-
+import person, { DEFAULT_PAGE_SIZE, debounce } from "./utility.js";
 export let currentPage = 1;
 export let currentPageSize = DEFAULT_PAGE_SIZE;
 export let queryString;
@@ -16,7 +15,10 @@ const editProductForm = document.querySelector("#edit-product");
 
 // EVENT LISTENERS
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  if (person.username === "Admin") {
+    await import("./admin.js");
+  }
   readProducts();
 });
 
