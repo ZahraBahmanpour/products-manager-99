@@ -51,11 +51,16 @@ export const readProducts = async () => {
         signal,
       }
     );
-    const data = await res.json();
-    const { products, count } = data;
-    productsTable.innerHTML = "";
-    products.forEach(addToDOM);
-    createPagination(count);
+    console.log(res);
+    if (res.ok) {
+      const data = await res.json();
+      const { products, count } = data;
+      productsTable.innerHTML = "";
+      products.forEach(addToDOM);
+      createPagination(count);
+    } else {
+      throw new Error(res.statusText);
+    }
   } catch (error) {
     console.log(error.message);
   } finally {
