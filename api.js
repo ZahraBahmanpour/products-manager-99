@@ -27,9 +27,26 @@ export const createNewProduct = async (event) => {
       body: JSON.stringify(newProduct),
     });
     const createdProduct = await res.json();
-    const formData = new FormData();
-    formData.append("image", event.target["file-input"].files[0]);
-    await fetch(`${BASE_URL}/upload`, { method: "POST", body: formData });
+    // const formData = new FormData();
+    // formData.append("image", event.target["file-input"].files[0]);
+    // await fetch(`${BASE_URL}/upload`, { method: "POST", body: formData });
+    let xhr = new XMLHttpRequest();
+    xhr.upload.onprogress = function (event) {
+      console.log(`Uploaded ${event.loaded} of ${event.total}`);
+    };
+
+    // track completion: both successful or not
+    xhr.onloadend = function () {
+      if (xhr.status == 200) {
+        console.log("success");
+      } else {
+        console.log("error " + this.status);
+      }
+    };
+
+    xhr.open("POST", `${BASE_URL}/upload`);
+    xhr.send(event.target["file-input"].files[0]);
+
     addToDOM(createdProduct);
   } catch (error) {
     console.log(error.message);

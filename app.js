@@ -70,25 +70,7 @@ document
     await debouncedReadProducts();
   });
 
-document.querySelector("#refresh-btn").addEventListener("click", () => {
-  const xhr = new XMLHttpRequest();
-  xhr.open("GET", "https://6300a18859a8760a757d441c.mockapi.io/products");
-  xhr.setRequestHeader("Content-Type", "application/json");
-  xhr.send();
-  xhr.onprogress = function (event) {
-    console.log(`Received ${event.loaded} of ${event.total} bytes`);
-  };
-  xhr.onload = () => {
-    if (xhr.status === 200) console.log(JSON.parse(xhr.response));
-    else console.log("error");
-  };
-  xhr.onerror = () => {
-    console.log("Network Error");
-  };
-  xhr.onprogress = (e) => {
-    console.log(`Received ${e.loaded} of ${e.total}`);
-  };
-});
+document.querySelector("#refresh-btn").addEventListener("click", readProducts);
 
 productForm.addEventListener("submit", createNewProduct);
 
